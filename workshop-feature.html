@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ワークショップ特集 | キャライノベイト</title>
+  <style>
+    :root {
+      --green: #004225;
+      --green-light: #0b6b3a;
+      --cream: #fbf7ef;
+      --gold: #c9a24b;
+      --text: #222222;
+      --muted: #666666;
+      --line: #e7dfd2;
+      --white: #ffffff;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      color: var(--text);
+      font-family: "Noto Sans JP", "Yu Gothic", "Hiragino Kaku Gothic ProN", sans-serif;
+      line-height: 1.7;
+      background: var(--cream);
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      padding: 18px 6vw;
+      background: rgba(255, 255, 255, 0.94);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .logo {
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      color: var(--green);
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      gap: 22px;
+      font-size: 14px;
+    }
+
+    .nav a {
+      color: #333333;
+    }
+
+    .nav .current {
+      color: var(--green);
+      font-weight: 700;
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 46px;
+      padding: 12px 24px;
+      border-radius: 999px;
+      background: var(--green);
+      color: var(--white);
+      font-weight: 700;
+      border: 2px solid var(--green);
+    }
+
+    .button.secondary {
+      background: var(--white);
+      color: var(--green);
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) minmax(280px, 0.9fr);
+      gap: 48px;
+      align-items: center;
+      padding: 72px 6vw;
+      background:
+        linear-gradient(120deg, rgba(0, 66, 37, 0.9), rgba(0, 66, 37, 0.72)),
+        url("https://images.unsplash.com/photo-1608571423902-eed4a5ad8108?auto=format&fit=crop&w=1400&q=80") center/cover;
+      color: var(--white);
+    }
+
+    .hero h1 {
+      margin: 0 0 18px;
+      font-size: clamp(32px, 5vw, 56px);
+      line-height: 1.25;
+    }
+
+    .hero p {
+      max-width: 720px;
+      margin: 0 0 28px;
+      font-size: 17px;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+    }
+
+    .hero-panel {
+      padding: 28px;
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.94);
+      color: var(--text);
+    }
+
+    .hero-panel dl {
+      display: grid;
+      grid-template-columns: 96px 1fr;
+      gap: 10px 16px;
+      margin: 0;
+      font-size: 15px;
+    }
+
+    .hero-panel dt {
+      color: var(--muted);
+    }
+
+    .hero-panel dd {
+      margin: 0;
+      font-weight: 700;
+    }
+
+    main {
+      background: var(--white);
+    }
+
+    .section {
+      padding: 64px 6vw;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .section-inner {
+      max-width: 1120px;
+      margin: 0 auto;
+    }
+
+    .section-title {
+      margin: 0 0 26px;
+      color: var(--green);
+      font-size: 30px;
+      line-height: 1.35;
+    }
+
+    .lead {
+      max-width: 800px;
+      margin: 0 0 30px;
+      color: var(--muted);
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 22px;
+    }
+
+    .card {
+      padding: 24px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #ffffff;
+    }
+
+    .card h3 {
+      margin: 0 0 10px;
+      color: var(--green);
+      font-size: 20px;
+    }
+
+    .card p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 15px;
+    }
+
+    .flow {
+      display: grid;
+      gap: 14px;
+      counter-reset: step;
+    }
+
+    .flow-item {
+      display: grid;
+      grid-template-columns: 48px 1fr;
+      gap: 16px;
+      align-items: start;
+      padding: 18px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fffdf8;
+    }
+
+    .flow-item::before {
+      counter-increment: step;
+      content: counter(step);
+      display: grid;
+      place-items: center;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: var(--green);
+      color: var(--white);
+      font-weight: 700;
+    }
+
+    .flow-item h3 {
+      margin: 0 0 4px;
+      font-size: 18px;
+    }
+
+    .flow-item p {
+      margin: 0;
+      color: var(--muted);
+    }
+
+    .brand-links {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .brand-link {
+      padding: 22px;
+      border-radius: 8px;
+      background: var(--cream);
+      border-left: 5px solid var(--gold);
+    }
+
+    .brand-link h3 {
+      margin: 0 0 8px;
+      color: var(--green);
+    }
+
+    .cta {
+      text-align: center;
+      background: var(--green);
+      color: var(--white);
+    }
+
+    .cta .section-title,
+    .cta .lead {
+      color: var(--white);
+    }
+
+    .cta .button {
+      background: var(--white);
+      color: var(--green);
+      border-color: var(--white);
+    }
+
+    .note {
+      margin-top: 18px;
+      color: rgba(255, 255, 255, 0.78);
+      font-size: 14px;
+    }
+
+    footer {
+      padding: 28px 6vw;
+      text-align: center;
+      color: var(--muted);
+      background: var(--cream);
+      font-size: 13px;
+    }
+
+    @media (max-width: 820px) {
+      .site-header {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .nav {
+        flex-wrap: wrap;
+        gap: 12px 18px;
+      }
+
+      .hero {
+        grid-template-columns: 1fr;
+        padding-top: 46px;
+      }
+
+      .grid,
+      .brand-links {
+        grid-template-columns: 1fr;
+      }
+
+      .button {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <a class="logo" href="#">KYARA INNOVATE</a>
+    <nav class="nav" aria-label="メインメニュー">
+      <a href="#">TOP</a>
+      <a href="#">会社</a>
+      <a href="#">ブランド</a>
+      <a class="current" href="#workshop">ワークショップ</a>
+      <a href="#">WEBSHOP</a>
+      <a class="button" href="#reserve">予約する</a>
+    </nav>
+  </header>
+
+  <section class="hero" id="workshop">
+    <div>
+      <h1>香りを選び、つくる体験。<br>ワークショップ特集</h1>
+      <p>
+        PERFUMERSやWANOWAなど、香りに関するブランドの世界観を体験できるワークショップを紹介します。
+        体験内容、料金、所要時間、当日の流れをまとめ、予約まで迷わず進めるページです。
+      </p>
+      <div class="hero-actions">
+        <a class="button" href="#reserve">ワークショップ予約</a>
+        <a class="button secondary" href="#flow">当日の流れを見る</a>
+      </div>
+    </div>
+    <aside class="hero-panel" aria-label="ワークショップ概要">
+      <dl>
+        <dt>内容</dt>
+        <dd>香りづくり体験</dd>
+        <dt>時間</dt>
+        <dd>約60分</dd>
+        <dt>料金</dt>
+        <dd>3,500円から</dd>
+        <dt>対象</dt>
+        <dd>初心者・観光客・ギフト利用</dd>
+      </dl>
+    </aside>
+  </section>
+
+  <main>
+    <section class="section">
+      <div class="section-inner">
+        <h2 class="section-title">体験できること</h2>
+        <p class="lead">
+          香りを知る、選ぶ、組み合わせる、持ち帰るまでを一つの体験として整理します。
+          スマホでも見やすく、予約前に必要な情報を確認できる構成にします。
+        </p>
+        <div class="grid">
+          <article class="card">
+            <h3>香りを選ぶ</h3>
+            <p>複数の香りを試しながら、自分に合う香りや贈り物に合う香りを選びます。</p>
+          </article>
+          <article class="card">
+            <h3>香りをつくる</h3>
+            <p>スタッフの説明を受けながら、香りの組み合わせを体験します。</p>
+          </article>
+          <article class="card">
+            <h3>持ち帰る</h3>
+            <p>完成した香りを、旅の思い出やギフトとして持ち帰ることができます。</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="flow">
+      <div class="section-inner">
+        <h2 class="section-title">当日の流れ</h2>
+        <div class="flow">
+          <div class="flow-item">
+            <div>
+              <h3>受付</h3>
+              <p>予約内容を確認し、体験の流れを説明します。</p>
+            </div>
+          </div>
+          <div class="flow-item">
+            <div>
+              <h3>香りの説明</h3>
+              <p>ブランドの考え方や、使用する香りの特徴を紹介します。</p>
+            </div>
+          </div>
+          <div class="flow-item">
+            <div>
+              <h3>香りづくり体験</h3>
+              <p>気に入った香りを選び、組み合わせながらオリジナルの香りを作ります。</p>
+            </div>
+          </div>
+          <div class="flow-item">
+            <div>
+              <h3>完成・持ち帰り</h3>
+              <p>完成品を確認し、持ち帰り方法や使い方を案内します。</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-inner">
+        <h2 class="section-title">関連ブランド</h2>
+        <p class="lead">
+          ワークショップに関係するブランドへのリンクを特集ページ内にまとめ、
+          商品情報と体験予約の導線を分かりやすくします。
+        </p>
+        <div class="brand-links">
+          <a class="brand-link" href="#">
+            <h3>PERFUMERS</h3>
+            <p>香水作りワークショップや限定の香りに関する情報へ誘導します。</p>
+          </a>
+          <a class="brand-link" href="#">
+            <h3>WANOWA</h3>
+            <p>地域素材や和の香りを体験できる情報へ誘導します。</p>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section cta" id="reserve">
+      <div class="section-inner">
+        <h2 class="section-title">少ないクリックで予約フォームへ</h2>
+        <p class="lead">
+          ページ上部・中部・下部に予約ボタンを配置し、スマホでも入力しやすいフォームへ誘導します。
+          氏名、連絡先、希望日時、人数など、必要な項目に整理します。
+        </p>
+        <a class="button" href="#">ワークショップ予約フォームへ</a>
+        <p class="note">このボタンから予約フォームへ直接移動する想定です。</p>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <small>&copy; KYARA INNOVATE workshop feature proposal</small>
+  </footer>
+</body>
+</html>
