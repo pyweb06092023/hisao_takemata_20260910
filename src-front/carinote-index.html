@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Carinoteは、作り手と使い手をつなぐワークショップ予約サービスです。">
+  <title>Carinote | 香りとものづくりのワークショップ</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --main: #8B6F5A;
+      --main-dark: #705744;
+      --sub: #A8B8A0;
+      --accent: #D98268;
+      --bg: #FAF8F3;
+      --text: #333333;
+      --muted: #77736D;
+      --line: #E6E0D8;
+      --white: #FFFFFF;
+      --radius: 8px;
+      --shadow: 0 4px 12px rgb(51 51 51 / 8%);
+      --max: 1200px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      color: var(--text);
+      background: var(--bg);
+      font-family: "Noto Sans JP", sans-serif;
+      line-height: 1.8;
+      letter-spacing: .03em;
+    }
+    a { color: inherit; text-decoration: none; }
+    img { display: block; max-width: 100%; }
+    .container { width: min(100% - 48px, var(--max)); margin: 0 auto; }
+    .section { padding: 96px 0; }
+    .section-heading { margin: 0 0 40px; }
+    .eyebrow {
+      margin: 0 0 8px;
+      color: var(--accent);
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: .14em;
+    }
+    h1, h2, h3, p { margin-top: 0; }
+    h2 { margin-bottom: 12px; font-size: clamp(26px, 3vw, 36px); line-height: 1.5; letter-spacing: .02em; }
+    .section-lead { max-width: 620px; margin-bottom: 0; color: var(--muted); }
+
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      border-bottom: 1px solid rgb(230 224 216 / 80%);
+      background: rgb(250 248 243 / 92%);
+      backdrop-filter: blur(12px);
+    }
+    .nav { display: flex; align-items: center; justify-content: space-between; min-height: 76px; }
+    .brand { color: var(--main); font-size: 25px; font-weight: 700; letter-spacing: .08em; }
+    .brand small { display: block; margin-top: -6px; color: var(--muted); font-size: 9px; font-weight: 500; letter-spacing: .16em; }
+    .nav-links { display: flex; align-items: center; gap: 28px; color: var(--muted); font-size: 14px; }
+    .nav-links a:hover { color: var(--main); }
+    .nav-cta { padding: 10px 18px; border-radius: var(--radius); color: var(--white) !important; background: var(--main); font-weight: 700; }
+    .nav-cta:hover { background: var(--main-dark); }
+
+    .hero { overflow: hidden; padding: 90px 0 100px; }
+    .hero-grid { display: grid; grid-template-columns: 1fr 1fr; align-items: center; gap: 72px; }
+    .hero h1 { max-width: 590px; margin-bottom: 20px; font-size: clamp(34px, 5vw, 58px); line-height: 1.35; letter-spacing: .02em; }
+    .hero h1 em { color: var(--main); font-style: normal; }
+    .hero-copy { max-width: 520px; margin-bottom: 32px; color: var(--muted); font-size: 17px; }
+    .actions { display: flex; flex-wrap: wrap; gap: 12px; }
+    .btn { display: inline-flex; align-items: center; justify-content: center; min-height: 48px; padding: 12px 24px; border: 2px solid transparent; border-radius: var(--radius); font-weight: 700; letter-spacing: .05em; transition: .2s ease; }
+    .btn-primary { color: var(--white); background: var(--main); }
+    .btn-primary:hover { background: var(--main-dark); box-shadow: var(--shadow); }
+    .btn-secondary { border-color: var(--main); color: var(--main); background: var(--white); }
+    .btn-secondary:hover { color: var(--white); background: var(--main); }
+    .hero-art { position: relative; min-height: 460px; }
+    .hero-art::before { position: absolute; inset: 24px 8px 0 34px; border-radius: 42% 58% 48% 52%; background: #E9E2D6; content: ""; }
+    .hero-card { position: absolute; right: 4%; bottom: 8%; width: 72%; padding: 28px; border-radius: 12px; background: var(--white); box-shadow: 0 18px 40px rgb(51 51 51 / 12%); }
+    .hero-card-art { height: 220px; margin-bottom: 20px; border-radius: 8px; background: linear-gradient(135deg, #D6C5B0, #A8B8A0 52%, #D98268); }
+    .hero-card p { margin-bottom: 0; color: var(--muted); font-size: 13px; }
+    .hero-card strong { display: block; margin-top: 2px; color: var(--text); font-size: 18px; }
+    .floating-note { position: absolute; top: 4%; left: 0; padding: 14px 18px; border-radius: var(--radius); color: var(--main); background: var(--white); box-shadow: var(--shadow); font-size: 13px; font-weight: 700; }
+
+    .workshops { background: var(--white); }
+    .section-top { display: flex; align-items: end; justify-content: space-between; gap: 20px; }
+    .text-link { color: var(--main); font-size: 14px; font-weight: 700; }
+    .text-link:hover { color: var(--accent); }
+    .card-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+    .card { overflow: hidden; border: 1px solid var(--line); border-radius: 12px; background: var(--white); box-shadow: var(--shadow); transition: transform .2s ease, box-shadow .2s ease; }
+    .card:hover { transform: translateY(-4px); box-shadow: 0 10px 24px rgb(51 51 51 / 12%); }
+    .card-image { height: 210px; background: linear-gradient(135deg, #D9C7B4, #A8B8A0); }
+    .card:nth-child(2) .card-image { background: linear-gradient(135deg, #C4D0C0, #E7C0AE); }
+    .card:nth-child(3) .card-image { background: linear-gradient(135deg, #DFC9B0, #B9A899); }
+    .card-body { padding: 22px; }
+    .card-meta { margin-bottom: 8px; color: var(--accent); font-size: 12px; font-weight: 700; }
+    .card h3 { margin-bottom: 8px; font-size: 19px; line-height: 1.5; }
+    .card p { margin-bottom: 18px; color: var(--muted); font-size: 14px; }
+    .card-info { display: flex; justify-content: space-between; padding-top: 14px; border-top: 1px solid var(--line); color: var(--muted); font-size: 12px; }
+
+    .concept-grid { display: grid; grid-template-columns: .9fr 1.1fr; align-items: center; gap: 80px; }
+    .concept-image { min-height: 360px; border-radius: 42% 58% 50% 50%; background: radial-gradient(circle at 35% 35%, #F0D7C4 0 12%, transparent 13%), linear-gradient(145deg, #E2D6C7, #A8B8A0); }
+    .concept-copy p { color: var(--muted); }
+    .concept-list { display: grid; gap: 14px; margin: 28px 0 0; padding: 0; list-style: none; }
+    .concept-list li { position: relative; padding-left: 28px; font-weight: 600; }
+    .concept-list li::before { position: absolute; top: 11px; left: 0; width: 10px; height: 10px; border-radius: 50%; background: var(--accent); content: ""; }
+
+    .cta { padding: 72px 0; color: var(--white); background: var(--main); }
+    .cta-inner { display: flex; align-items: center; justify-content: space-between; gap: 32px; }
+    .cta h2 { margin-bottom: 8px; }
+    .cta p { margin-bottom: 0; opacity: .84; }
+    .cta .btn { color: var(--main); background: var(--white); }
+    .cta .btn:hover { color: var(--white); background: var(--accent); }
+    .site-footer { padding: 34px 0; color: var(--muted); background: #F1ECE4; font-size: 12px; }
+    .footer-inner { display: flex; justify-content: space-between; gap: 20px; }
+
+    @media (max-width: 1023px) {
+      .hero-grid { gap: 40px; }
+      .hero-art { min-height: 380px; }
+      .card-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 767px) {
+      .container { width: min(100% - 32px, var(--max)); }
+      .section { padding: 64px 0; }
+      .nav { min-height: 68px; }
+      .nav-links a:not(.nav-cta) { display: none; }
+      .nav-links { gap: 10px; }
+      .hero { padding: 58px 0 64px; }
+      .hero-grid, .concept-grid { grid-template-columns: 1fr; gap: 36px; }
+      .hero h1 { font-size: 36px; }
+      .hero-art { min-height: 320px; }
+      .hero-card { width: 80%; }
+      .hero-card-art { height: 150px; }
+      .section-top, .cta-inner, .footer-inner { align-items: start; flex-direction: column; }
+      .card-grid { grid-template-columns: 1fr; }
+      .concept-image { min-height: 260px; }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container nav">
+      <a class="brand" href="carinote-index.html">Carinote<small>WORKSHOP &amp; CRAFT</small></a>
+      <nav class="nav-links" aria-label="メインナビゲーション">
+        <a href="#workshops">ワークショップ</a>
+        <a href="#concept">Carinoteについて</a>
+        <a href="carinote-contact.html">お問い合わせ</a>
+        <a class="nav-cta" href="carinote-workshops.html">予約を探す</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="container hero-grid">
+        <div>
+          <p class="eyebrow">MAKE, FEEL, CONNECT</p>
+          <h1>香りとものづくりで、<br><em>心に残る時間</em>を。</h1>
+          <p class="hero-copy">Carinoteは、作り手の想いに触れながら、自分だけの体験を見つけられるワークショップ予約サービスです。</p>
+          <div class="actions">
+            <a class="btn btn-primary" href="carinote-workshops.html">ワークショップを探す</a>
+            <a class="btn btn-secondary" href="#concept">Carinoteについて</a>
+          </div>
+        </div>
+        <div class="hero-art" aria-label="ワークショップのイメージ">
+          <div class="floating-note">作り手と使い手をつなぐ場所</div>
+          <div class="hero-card">
+            <div class="hero-card-art"></div>
+            <p>今月のおすすめ</p>
+            <strong>香りづくりのワークショップ</strong>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section workshops" id="workshops">
+      <div class="container">
+        <div class="section-top section-heading">
+          <div>
+            <p class="eyebrow">WORKSHOPS</p>
+            <h2>開催予定のワークショップ</h2>
+            <p class="section-lead">気になるテーマや開催日から、あなたにぴったりの体験を探してみませんか。</p>
+          </div>
+          <a class="text-link" href="carinote-workshops.html">一覧を見る →</a>
+        </div>
+        <div class="card-grid">
+          <article class="card">
+            <div class="card-image" role="img" aria-label="香りづくりのイメージ"></div>
+            <div class="card-body">
+              <div class="card-meta">香り・植物　｜　10月10日</div>
+              <h3>自分だけの香りをつくる</h3>
+              <p>素材の香りを楽しみながら、オリジナルの香水をつくります。</p>
+              <div class="card-info"><span>東京・蔵前</span><span>3,000円〜</span></div>
+            </div>
+          </article>
+          <article class="card">
+            <div class="card-image" role="img" aria-label="ものづくりのイメージ"></div>
+            <div class="card-body">
+              <div class="card-meta">ものづくり　｜　10月17日</div>
+              <h3>手のひらサイズの器づくり</h3>
+              <p>土に触れ、暮らしに寄り添う器をつくるやさしい時間です。</p>
+              <div class="card-info"><span>京都・東山</span><span>2,500円〜</span></div>
+            </div>
+          </article>
+          <article class="card">
+            <div class="card-image" role="img" aria-label="地域文化のイメージ"></div>
+            <div class="card-body">
+              <div class="card-meta">地域文化　｜　10月24日</div>
+              <h3>土地の記憶を聞く、染め体験</h3>
+              <p>地域に伝わる素材と技法から、ものづくりの背景を学びます。</p>
+              <div class="card-info"><span>金沢・長町</span><span>4,000円〜</span></div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="concept">
+      <div class="container concept-grid">
+        <div class="concept-image" role="img" aria-label="作り手と使い手の交流を表すイメージ"></div>
+        <div class="concept-copy">
+          <p class="eyebrow">ABOUT CARINOTE</p>
+          <h2>買うだけでは終わらない、<br>背景に出会う。</h2>
+          <p>商品を売るだけでなく、香りやものづくりの背景を伝え、作り手と使い手が交流できる場を提供します。商品の魅力や想いを共有し、双方のつながりを育みます。</p>
+          <ul class="concept-list">
+            <li>作り手の想いに触れられる</li>
+            <li>地域ならではの体験が見つかる</li>
+            <li>安心して簡単に予約できる</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="cta">
+      <div class="container cta-inner">
+        <div>
+          <h2>次の休日に、手を動かす体験を。</h2>
+          <p>あなたの心に残るワークショップを見つけましょう。</p>
+        </div>
+        <a class="btn" href="carinote-workshops.html">ワークショップを探す</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <span>© Carinote</span>
+      <span>香りとものづくりのワークショップ予約サービス</span>
+    </div>
+  </footer>
+</body>
+</html>
